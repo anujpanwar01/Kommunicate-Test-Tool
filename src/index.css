@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 body {
+  font-size: 16px;
   margin: 0;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -21,4 +22,11 @@ body.theme-black {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
 }

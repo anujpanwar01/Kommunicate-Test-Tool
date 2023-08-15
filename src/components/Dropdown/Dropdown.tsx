@@ -9,6 +9,7 @@ const Dropdown: React.FC<{
 }> = ({ defaultValue, options, onChangeHandler }) => {
   return (
     <Select
+      isSearchable={false}
       defaultValue={defaultValue}
       onChange={(option) => {
         onChangeHandler(option as OptionInterface | null);

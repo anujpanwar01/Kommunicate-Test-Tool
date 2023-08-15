@@ -13,7 +13,7 @@ export const Header = styled.header<ThemeInterface>`
         `};
   box-shadow: 0 2px 5px #0000001c;
   font-size: 18px;
-  padding: 12px 16px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;

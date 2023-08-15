@@ -4,6 +4,7 @@ import ThemeContext from './store/ThemeContext';
 import { DARK_THEME } from './Helper/Constant';
 
 const Header = React.lazy(() => import('./components/Header/Header'));
+const Editor = React.lazy(() => import('./Pages/Editor'));
 
 function App() {
   const { theme } = useContext(ThemeContext);
@@ -18,6 +19,7 @@ function App() {
   return (
     <React.Suspense fallback={<p>Loading</p>}>
       <Header />
+      <Editor />
     </React.Suspense>
   );
 }

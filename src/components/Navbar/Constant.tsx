@@ -19,7 +19,7 @@ export const NavItems: NavInterface[] = [
   },
   {
     icon: <StackOverflowIcon />,
-    title: 'stack overflow',
+    title: 'Stack overflow',
     url: 'https://stackoverflow.com/users/17752587/anuj-panwar',
   },
   {
