@@ -5,13 +5,14 @@ export const Header = styled.header<ThemeInterface>`
   ${(props) =>
     props.theme === DARK_THEME
       ? css`
-          color: #1c1c1c;
-          background-color: #ffffff;
+          background-color: #1c2128;
+          box-shadow: inset 0 -1px 0 #373e47;
         `
       : css`
+          box-shadow: inset 0 #0000001c;
           background-color: #f5f5f5;
         `};
-  box-shadow: 0 2px 5px #0000001c;
+
   font-size: 18px;
   padding: 8px 16px;
   display: flex;

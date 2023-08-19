@@ -8,13 +8,11 @@ export const AppIdContainer = styled.div`
   input {
     font-size: 16px;
     padding: 12px 16px;
-    width: 100%;
-    border-radius: 24px;
-    border: 1px solid green;
+    width: 90%;
   }
   button {
     padding: 12px 16px;
-    border-radius: 24px;
+    /* border-radius: 24px; */
     width: 160px;
     cursor: pointer;
   }

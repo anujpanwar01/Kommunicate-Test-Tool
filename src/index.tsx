@@ -4,17 +4,20 @@ import './index.css';
 import App from './App';
 import { ThemProvider } from './store/ThemeContext';
 import { MainProvider } from './store/MainContext';
-
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 root.render(
   <React.StrictMode>
-    <ThemProvider>
-      <MainProvider>
-        <App />
-      </MainProvider>
-    </ThemProvider>
+    <Provider store={store}>
+      <ThemProvider>
+        <MainProvider>
+          <App />
+        </MainProvider>
+      </ThemProvider>
+    </Provider>
   </React.StrictMode>,
 );

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Navbar = styled.nav`
+export const Navbar = styled.nav<{ isblacktheme: string }>`
   display: flex;
   align-items: center;
   gap: 50px;
-  color: #1c1c1c;
+  color: ${(props) => (+props.isblacktheme ? '#adbac7' : '#1c1c1c')};
 
   li {
     cursor: pointer;
@@ -32,10 +32,10 @@ export const Navbar = styled.nav`
   svg {
     height: 24px;
     width: 24px;
-    fill: #1c1c1c;
+    fill: ${(props) => (+props.isblacktheme ? '#adbac7' : '#1c1c1c')};
   }
   .title {
-    color: #003cff;
+    color: #539bf5;
     font-size: 14px;
     position: absolute;
     transform: translate(-10px, 50px);

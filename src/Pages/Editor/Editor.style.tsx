@@ -3,12 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
-  border-radius: 24px;
-
-  width: 600px;
-  margin: 30px 0 0 18px;
-  padding: 20px 16px;
+  border-right: 1px solid #373e47;
+  width: 45%;
+  padding: 40px 16px;
   & > div {
     margin-bottom: 16px;
   }

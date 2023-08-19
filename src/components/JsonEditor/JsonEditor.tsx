@@ -8,10 +8,10 @@ const JsonEditor: React.FC = () => {
   return (
     <MonacoEditor
       height="450px"
+      theme="vs-dark"
       width="100%"
       options={{
         minimap: { enabled: false },
-        // theme: 'vs-dark',
         fontSize: 14,
         wordWrap: 'on',
       }}

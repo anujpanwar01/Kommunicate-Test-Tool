@@ -2,12 +2,13 @@ import React from 'react';
 import * as Style from './Navbar.style';
 import { NavItems } from './Constant';
 import Theme from '../Theme/Theme';
+import ThemeContext from '../../store/ThemeContext';
+import { DARK_THEME } from '../../Helper/Constant';
 
 const Navbar: React.FC = () => {
-  // const [lit]
-  // show-title
+  const { theme } = React.useContext(ThemeContext);
   return (
-    <Style.Navbar>
+    <Style.Navbar isblacktheme={`${theme.value === DARK_THEME ? '1' : '0'}`}>
       {NavItems.map((item) => {
         return (
           <li className="nav-item" key={item.title}>

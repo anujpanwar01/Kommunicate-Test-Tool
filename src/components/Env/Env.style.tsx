@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 24px;
 
   & label {
     display: flex;
