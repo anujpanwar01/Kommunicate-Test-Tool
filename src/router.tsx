@@ -26,6 +26,5 @@ const homeRoutes = ['/', 'dashboard', 'home'].map((route) => ({
 }));
 
 routerArr.unshift(...homeRoutes);
-console.log(homeRoutes, routerArr);
 
 export default routerArr;

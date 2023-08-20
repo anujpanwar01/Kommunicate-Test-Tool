@@ -44,3 +44,22 @@ input {
 #root {
   height: 100vh
 }
+
+* {
+
+  transition: background 300ms ease-in, border 300ms ease, color 0.25ms ease;
+}
+
+.Toastify {
+  color: #ffffff;
+  /* Replace with your desired text color */
+
+}
+
+.Toastify__toast-body {
+  color: #1c1c1c
+}
+
+/* header {
+  transition: background-color 300ms ease-in;
+} */

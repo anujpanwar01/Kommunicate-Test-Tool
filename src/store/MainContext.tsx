@@ -2,6 +2,8 @@ import React from 'react';
 import { DEFAULT_OPTIONS, ENVIRONMENT, EnvInterface } from '../Helper/Constant';
 import Kommunicate from '../Script/kmScript';
 import Firebase from '../Script/Firebase';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
 
 const MainContext = React.createContext<Context>({
   envs: [],
@@ -12,7 +14,7 @@ const MainContext = React.createContext<Context>({
   setCurrentEnv: (option) => {},
   setAppId: (value) => {},
   runKmScript: () => {},
-  handleRunScript: () => {},
+  handleRunScript: (bool: boolean) => {},
   updateOptions: (value: string) => {},
   updateEnvs: () => {},
 });
@@ -25,13 +27,15 @@ export const MainProvider: React.FC<MainType> = ({ children }) => {
   const [appId, setAppId] = React.useState(currentEnv.appId);
   const [runScript, setRunScript] = React.useState(false);
   const [options, setOptions] = React.useState(DEFAULT_OPTIONS); // need to convert this into string
-
+  const { currentServer } = useSelector((state: RootState) => state.env);
 
   React.useEffect(() => {
     setAppId(currentEnv.appId);
   }, [currentEnv]);
 
-  const handleRunScript = () => setRunScript(!runScript);
+  const handleRunScript = (bool: boolean) => {
+    setRunScript(bool);
+  };
 
   const runKmScript = () => {
     let opt = {
@@ -45,8 +49,8 @@ export const MainProvider: React.FC<MainType> = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-    handleRunScript();
-    Kommunicate.init(appId, opt);
+    handleRunScript(true);
+    Kommunicate.init(appId, opt, currentServer.value);
   };
 
   const updateOptions = (value: string) => {
@@ -92,7 +96,7 @@ type Context = {
   setCurrentEnv: (option: EnvInterface) => void;
   setAppId: (value: string) => void;
   runKmScript: () => void;
-  handleRunScript: () => void;
+  handleRunScript: (bool: boolean) => void;
   updateOptions: (value: string) => void;
   updateEnvs: (arry: EnvInterface[]) => void;
 };

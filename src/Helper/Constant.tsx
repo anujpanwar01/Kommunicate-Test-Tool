@@ -28,12 +28,25 @@ export const ENVIRONMENT: EnvInterface[] = [
     checked: false,
     id: 3,
   },
+  {
+    name: 'Beta',
+    appId: 'kommunicate-support',
+    checked: false,
+    id: 4,
+  },
+  // {
+  //   name: 'Enterprise',
+  //   appId: 'kommunicate-support',
+  //   checked: false,
+  //   id: 5,
+  // },
 ];
 
 export const DEFAULT_OPTIONS = `{
   "popupWidget": true,
   "automaticChatOpenOnNavigation": true
 }`;
+
 export const THEME_DROPDOWN = [
   {
     label: <LightIcon />,
@@ -45,6 +58,33 @@ export const THEME_DROPDOWN = [
   },
 ];
 
+export const SERVER: ServerInterface[] = [
+  {
+    id: 0,
+    label: 'Default',
+    value: 'widget',
+  },
+  {
+    id: 1,
+    label: 'India',
+    value: 'widget-in',
+  },
+  {
+    id: 2,
+    label: 'Europe',
+    value: 'widget-eu',
+  },
+  {
+    id: 3,
+    label: 'Canada',
+    value: 'widget-cn',
+  },
+];
+export interface ServerInterface {
+  id: number;
+  value: string;
+  label: string;
+}
 export interface OptionInterface {
   label: string | React.ReactElement;
   value: string | number | boolean;

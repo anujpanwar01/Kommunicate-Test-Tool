@@ -23,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
 export default Button;
 
 const ButtonStyle = styled.button<ButtonProps & { isblacktheme: string }>`
+  border-radius: 4px;
   padding: 12px 16px;
   background: ${(props) => (+props.isblacktheme ? '#373e47' : ' whitesmoke')};
   border: 1px solid

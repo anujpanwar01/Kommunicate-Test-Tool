@@ -1,10 +1,12 @@
 import { KommunicateType, appWindow } from './type';
 
 const Kommunicate: KommunicateType = {
-  init: (appId, options) => {
+  init: (appId, options, server) => {
     let env: string = 'production';
 
-    let scriptSource = 'https://widget.kommunicate.io/v2/kommunicate.app';
+    let scriptSource = `https://${
+      server || 'widget'
+    }.kommunicate.io/v2/kommunicate.app`;
     if (!appId) {
       console.info('Please provide appId to initialize the widget');
       return;
@@ -35,8 +37,13 @@ const Kommunicate: KommunicateType = {
         scriptSource =
           'https://widget-release.kommunicate.io/v2/kommunicate.app';
         break;
+      case 'beta':
+        scriptSource = 'https://widget-beta.kommunicate.io/v2/kommunicate.app';
+        break;
       default:
-        scriptSource = 'https://widget.kommunicate.io/v2/kommunicate.app';
+        scriptSource = `https://${
+          server || 'widget'
+        }.kommunicate.io/v2/kommunicate.app`;
         break;
     }
     (function (d, m: any) {

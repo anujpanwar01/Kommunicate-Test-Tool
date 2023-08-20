@@ -1,11 +1,25 @@
 import React from 'react';
 import { MainContainer } from './Env.style';
-import { EnvInterface } from '../../Helper/Constant';
+import {
+  EnvInterface,
+  SERVER,
+  ServerInterface,
+  isBlackTheme,
+} from '../../Helper/Constant';
 import MainContext from '../../store/MainContext';
 import LocalStorage from '../../LocalStorage/LocalStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import Dropdown from '../Dropdown/Dropdown';
+import { setCurrentServer } from '../../store/Env.Slice';
+import ThemeContext from '../../store/ThemeContext';
 
 const Env: React.FC = () => {
+  const { theme } = React.useContext(ThemeContext);
   const { envs, setCurrentEnv, updateEnvs } = React.useContext(MainContext);
+  const { currentServer } = useSelector((state: RootState) => state.env);
+  const dispatch = useDispatch();
+  const blackTheme = isBlackTheme(theme);
 
   const onChangeHandler = (option: EnvInterface, index: number) => {
     const opt = { ...option, checked: true };
@@ -22,6 +36,13 @@ const Env: React.FC = () => {
     LocalStorage.setItem('envList', LocalStorage.stringify(envsCopy));
     setCurrentEnv(opt);
     updateEnvs(envsCopy);
+  };
+
+  const dropdownChangeHandler = (option: unknown) => {
+    if (option === null) return;
+    const selectedOption = option as ServerInterface;
+    LocalStorage.setItem('currentServer', JSON.stringify(selectedOption));
+    dispatch(setCurrentServer(selectedOption));
   };
 
   return (
@@ -42,6 +63,16 @@ const Env: React.FC = () => {
           </label>
         );
       })}
+      <Dropdown
+        className="env-dropdown"
+        options={SERVER}
+        defaultValue={currentServer}
+        onChange={dropdownChangeHandler}
+        customStyle={{
+          controlBg: +blackTheme ? '#373e47' : 'whitesmoke',
+          menuBg: +blackTheme ? '#373e47' : 'whitesmoke',
+        }}
+      />
     </MainContainer>
   );
 };

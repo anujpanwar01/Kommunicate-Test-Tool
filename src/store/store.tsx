@@ -1,8 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import LoginReducer from './Login.Slice';
+import EnvReducer from './Env.Slice';
+// import ThemeReducer from './Theme.Slice';
+
 export const store = configureStore({
   reducer: {
     login: LoginReducer,
+    env: EnvReducer,
+    // theme: ThemeReducer,
   },
 });
 

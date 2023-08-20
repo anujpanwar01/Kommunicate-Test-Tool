@@ -12,9 +12,10 @@ export const ThemProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [theme, setTheme] = useState(THEME_DROPDOWN[0] as OptionInterface);
 
-  const onChangeHandler = (option: OptionInterface | null) => {
+  const onChangeHandler = (option: unknown) => {
     if (option === null) return;
-    setTheme(option);
+    const selectedOption = option as OptionInterface;
+    setTheme(selectedOption);
   };
 
   return (
@@ -28,5 +29,5 @@ export default ThemeContext;
 
 interface Context {
   theme: OptionInterface;
-  onChangeHandler: (option: OptionInterface | null) => void;
+  onChangeHandler: (option: unknown) => void;
 }

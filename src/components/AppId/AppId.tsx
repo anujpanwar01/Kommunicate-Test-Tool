@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { AppIdContainer } from './AppId.style';
 import Input from '../Input/Input';
 import MainContext from '../../store/MainContext';
@@ -6,6 +7,7 @@ import Kommunicate from '../../Script/kmScript';
 import LocalStorage from '../../LocalStorage/LocalStorage';
 import { EnvInterface } from '../../Helper/Constant';
 import Button from '../Button/Button';
+import { appWindow } from '../../Script/type';
 
 const AppId = () => {
   const {
@@ -19,6 +21,56 @@ const AppId = () => {
     setCurrentEnv,
     updateEnvs,
   } = React.useContext(MainContext);
+  const [loading, setLoading] = React.useState(false);
+  const loadingRef = React.useRef(loading);
+
+  const isKmScriptLoaded = () => {
+    setLoading(true);
+    loadingRef.current = true;
+
+    const intervalId = setInterval(() => {
+      if (appWindow.Kommunicate) {
+        setLoading(false);
+        loadingRef.current = false;
+        console.info('Widget loaded successfully');
+        toast.success('Widget loaded successfully', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        clearInterval(intervalId);
+      }
+    }, 1000);
+
+    if (loadingRef.current) {
+      const timeId = setTimeout(() => {
+        clearTimeout(timeId);
+        if (loadingRef.current === false) return;
+        toast.error(
+          'Not able to load your Kommunicate widget please check you appId',
+          {
+            position: 'top-right',
+            autoClose: 6000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          },
+        );
+        setLoading(false);
+        clearInterval(intervalId);
+        document.querySelector('.kommunicate-custom-iframe')?.remove();
+        document.querySelector('#km-fullscreen-image-modal')?.remove();
+        handleRunScript(false);
+        console.info(
+          'Not able to load your Kommunicate widget please check you appId',
+        );
+      }, 10000);
+    }
+  };
 
   const handleLocalStorage = (env: EnvInterface, envArr: EnvInterface[]) => {
     if (!env) return;
@@ -57,19 +109,25 @@ const AppId = () => {
 
   const onClickHandler = () => {
     if (!runScript) {
+      isKmScriptLoaded();
       runKmScript();
       return;
     }
 
     Kommunicate.logout();
-    handleRunScript();
+    handleRunScript(false);
   };
+  console.log(runScript);
+  const btnText = !runScript ? 'Run Script' : 'Logout';
 
   return (
     <AppIdContainer>
       <Input type="text" onChange={onChangeHandler} value={appId} />
-      <Button onKeyDown={onKeyPress} onClick={onClickHandler}>
-        {!runScript ? 'Run Script' : 'Logout'}
+      <Button
+        onKeyDown={loading ? () => {} : onKeyPress}
+        onClick={loading ? () => {} : onClickHandler}
+      >
+        {loading ? 'Loading...' : btnText}
       </Button>
     </AppIdContainer>
   );

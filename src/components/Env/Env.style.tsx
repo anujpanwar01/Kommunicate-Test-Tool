@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
-  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
 
   & label {
     display: flex;
-    gap: 6px;
+    gap: 10px;
     &,
     input {
       cursor: pointer;

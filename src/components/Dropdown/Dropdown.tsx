@@ -4,20 +4,28 @@ import Select, {
   components,
   OptionProps,
   ControlProps,
-  StylesConfig,
+  Props as SelectProps,
 } from 'react-select';
-import { OptionInterface, isBlackTheme } from '../../Helper/Constant';
+import { isBlackTheme } from '../../Helper/Constant';
 import styled from 'styled-components';
 import { DropdownIcon } from '../../Svgs/Svg';
 import ThemeContext from '../../store/ThemeContext';
 import { getStyle, Menu, MenuList } from './utils';
 
-const Dropdown: React.FC<{
-  className?: string;
-  defaultValue: OptionInterface;
-  options: OptionInterface[];
-  onChangeHandler: (option: OptionInterface | null) => void;
-}> = ({ defaultValue, className, options, onChangeHandler }) => {
+export interface DropdownInterface {
+  controlBg: string;
+  menuBg: string;
+  // labelColor: string;
+}
+
+const Dropdown: React.FC<SelectProps & { customStyle: DropdownInterface }> = ({
+  defaultValue,
+  className,
+  options,
+  customStyle,
+  onChange,
+  ...props
+}) => {
   const { theme } = React.useContext(ThemeContext);
 
   return (
@@ -26,12 +34,11 @@ const Dropdown: React.FC<{
       isblacktheme={isBlackTheme(theme)}
       isSearchable={false}
       defaultValue={defaultValue}
-      onChange={(option) => {
-        onChangeHandler(option as OptionInterface | null);
-      }}
+      onChange={onChange}
       components={{ DropdownIndicator, Option, Control, Menu, MenuList }}
       options={options}
-      styles={getStyle(theme)}
+      styles={getStyle(theme, customStyle)}
+      {...props}
     />
   );
 };
@@ -46,9 +53,11 @@ const StyleSelect = styled(Select)<{ isblacktheme: string }>`
 export default Dropdown;
 
 const DropdownIndicator: React.FC<DropdownIndicatorProps> = (props) => {
+  const { theme } = React.useContext(ThemeContext);
+  const blackBg = isBlackTheme(theme);
   return (
     <components.DropdownIndicator className="dropdown-svg" {...props}>
-      <DropdownIcon />
+      <DropdownIcon pathFill={+blackBg ? '#adbac7' : '#1c2128'} />
     </components.DropdownIndicator>
   );
 };
@@ -64,11 +73,4 @@ const Option: React.FC<OptionProps> = (props) => {
 
 const Control: React.FC<ControlProps> = (props) => {
   return <components.Control className="dropdown-control" {...props} />;
-};
-
-const CUSTOM_STYLE: StylesConfig = {
-  control: (style) => {
-    console.log(style);
-    return { ...style, backgroundColor: 'red' };
-  },
 };
