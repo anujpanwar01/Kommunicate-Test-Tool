@@ -34,6 +34,23 @@ export const getStyle = (
     singleValue: (style) => {
       return { ...style, color: 'inherit', fontSize: '14px' };
     },
+    option: (provided, state) => {
+      return {
+        ...provided,
+        backgroundColor: state.isSelected
+          ? '#007bff'
+          : state.isFocused && state.isSelected
+          ? '#007bff'
+          : 'inherit',
+        ':active': {
+          color: 'white',
+        },
+        ':hover': {
+          backgroundColor: '#007bff',
+          color: 'white',
+        },
+      };
+    },
   };
   return CUSTOM_STYLE;
 };

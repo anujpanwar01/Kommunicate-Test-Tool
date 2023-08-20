@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 const Editor = () => {
   return (
-    <Container>
+    <Container className="editor-container">
       <Env />
       <AppId />
       <JsonEditor />

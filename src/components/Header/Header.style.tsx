@@ -9,7 +9,7 @@ export const Header = styled.header<ThemeInterface>`
           box-shadow: inset 0 -1px 0 #373e47;
         `
       : css`
-          box-shadow: inset 0 #0000001c;
+          border-bottom: 1px solid #dddddd;
           background-color: #f5f5f5;
         `};
 
@@ -18,6 +18,7 @@ export const Header = styled.header<ThemeInterface>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   h4 {
     margin: 0;
   }

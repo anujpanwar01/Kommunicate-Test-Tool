@@ -1,4 +1,6 @@
 import React from 'react';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 import { MainContainer } from './Env.style';
 import {
   EnvInterface,
@@ -48,8 +50,21 @@ const Env: React.FC = () => {
   return (
     <MainContainer>
       {envs.map((ele, i) => {
+        const disabled = currentServer.id !== 0 && ele.id !== 3;
+        const id = `disable-label-${ele.name.toLowerCase()}`;
+
         return (
-          <label htmlFor={ele.name.toLowerCase()} key={ele.name}>
+          <label
+            id={disabled ? id : ''}
+            className={
+              (disabled ? 'disable-label' : '') + ' ' + ele.name.toLowerCase()
+            }
+            htmlFor={ele.name.toLowerCase()}
+            key={ele.name}
+            data-tooltip-id={id}
+            data-tooltip-content={disabled ? ele.tooltipContent : ''}
+            data-tooltip-place="top"
+          >
             <input
               id={ele.name.toLowerCase()}
               type="radio"
@@ -57,22 +72,35 @@ const Env: React.FC = () => {
               onChange={(e) => {
                 onChangeHandler(ele, i);
               }}
+              disabled={disabled} // production env
               checked={ele.checked}
             />
             <p>{ele.name}</p>
+            {disabled ? (
+              <ReactTooltip
+                className={`env-${
+                  +blackTheme ? 'dark' : 'white'
+                }-theme-tooltip`}
+                place="top"
+                id={id}
+              />
+            ) : null}
           </label>
         );
       })}
-      <Dropdown
-        className="env-dropdown"
-        options={SERVER}
-        defaultValue={currentServer}
-        onChange={dropdownChangeHandler}
-        customStyle={{
-          controlBg: +blackTheme ? '#373e47' : 'whitesmoke',
-          menuBg: +blackTheme ? '#373e47' : 'whitesmoke',
-        }}
-      />
+      <div style={{ marginLeft: 'auto' }}>
+        {' '}
+        <Dropdown
+          className="env-dropdown"
+          options={SERVER}
+          defaultValue={currentServer}
+          onChange={dropdownChangeHandler}
+          customStyle={{
+            controlBg: +blackTheme ? '#373e47' : 'whitesmoke',
+            menuBg: +blackTheme ? '#373e47' : 'whitesmoke',
+          }}
+        />
+      </div>
     </MainContainer>
   );
 };

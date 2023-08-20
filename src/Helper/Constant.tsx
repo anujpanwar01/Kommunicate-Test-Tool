@@ -9,18 +9,21 @@ export const ENVIRONMENT: EnvInterface[] = [
     appId: '1ec30c318f5f1b55a74c50843d55398fc',
     checked: true,
     id: 0,
+    tooltipContent: 'Currently not available!',
   },
   {
     name: 'Test',
     appId: '1ec30c318f5f1b55a74c50843d55398fc',
     checked: false,
     id: 1,
+    tooltipContent: 'Currently not available!',
   },
   {
     name: 'Release',
     appId: '1ec30c318f5f1b55a74c50843d55398fc',
     checked: false,
     id: 2,
+    tooltipContent: 'Currently not available!',
   },
   {
     name: 'Production',
@@ -28,12 +31,12 @@ export const ENVIRONMENT: EnvInterface[] = [
     checked: false,
     id: 3,
   },
-  {
-    name: 'Beta',
-    appId: 'kommunicate-support',
-    checked: false,
-    id: 4,
-  },
+  // {
+  //   name: 'Beta',
+  //   appId: 'kommunicate-support',
+  //   checked: false,
+  //   id: 4,
+  // },
   // {
   //   name: 'Enterprise',
   //   appId: 'kommunicate-support',
@@ -61,22 +64,22 @@ export const THEME_DROPDOWN = [
 export const SERVER: ServerInterface[] = [
   {
     id: 0,
-    label: 'Default',
+    label: 'Default region(US)',
     value: 'widget',
   },
   {
     id: 1,
-    label: 'India',
+    label: 'India region',
     value: 'widget-in',
   },
   {
     id: 2,
-    label: 'Europe',
+    label: 'Europe region',
     value: 'widget-eu',
   },
   {
     id: 3,
-    label: 'Canada',
+    label: 'Canada region',
     value: 'widget-cn',
   },
 ];
@@ -99,6 +102,7 @@ export interface EnvInterface {
   name: string;
   checked?: boolean;
   id: number | string;
+  tooltipContent?: string;
 }
 
 export const isBlackTheme = (theme: OptionInterface): string =>

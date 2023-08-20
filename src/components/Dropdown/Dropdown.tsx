@@ -30,7 +30,7 @@ const Dropdown: React.FC<SelectProps & { customStyle: DropdownInterface }> = ({
 
   return (
     <StyleSelect
-      className={className}
+      className={'dropdown' + ' ' + className}
       isblacktheme={isBlackTheme(theme)}
       isSearchable={false}
       defaultValue={defaultValue}
@@ -49,6 +49,11 @@ const StyleSelect = styled(Select)<{ isblacktheme: string }>`
   .dropdown-control {
     ${(props) => (+props.isblacktheme ? '#1c2128' : 'inherit')}
   }
+  .dropdown_option-is-focused {
+    background-color: lightblue;
+  }
+  .dropdown-menu-list {
+  }
 `;
 export default Dropdown;
 
@@ -63,9 +68,18 @@ const DropdownIndicator: React.FC<DropdownIndicatorProps> = (props) => {
 };
 
 const Option: React.FC<OptionProps> = (props) => {
+  const { cx, isDisabled, isFocused, isSelected } = props;
   return (
     <components.Option
-      className="dropdown-option"
+      className={cx(
+        {
+          option: true,
+          'option--is-disabled': isDisabled,
+          'option--is-focused': isFocused,
+          'option--is-selected': isSelected,
+        },
+        'dropdown',
+      )}
       {...props}
     ></components.Option>
   );

@@ -8,6 +8,8 @@ import LocalStorage from '../../LocalStorage/LocalStorage';
 import { EnvInterface } from '../../Helper/Constant';
 import Button from '../Button/Button';
 import { appWindow } from '../../Script/type';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const AppId = () => {
   const {
@@ -21,8 +23,17 @@ const AppId = () => {
     setCurrentEnv,
     updateEnvs,
   } = React.useContext(MainContext);
+  const { currentServer } = useSelector((state: RootState) => state.env);
   const [loading, setLoading] = React.useState(false);
   const loadingRef = React.useRef(loading);
+
+  const validationHandler = () => {
+    const isDisabled = currentServer.id !== 0 && currentEnv.id !== 3; // 0 default server Us region, 3 production env
+    return {
+      isDisabled,
+      infoLabel: `${currentEnv.name} environment is not supported in ${currentServer.label}`,
+    };
+  };
 
   const isKmScriptLoaded = () => {
     const isLocal = currentEnv.id === 0;
@@ -104,6 +115,18 @@ const AppId = () => {
   };
 
   const onKeyPress = (e: { key: number | string }) => {
+    const { isDisabled, infoLabel } = validationHandler();
+    if (isDisabled) {
+      toast.info(infoLabel, {
+        position: 'top-right',
+        autoClose: 6000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
     if (e.key === 'Enter') {
       // run script
       runKmScript();
@@ -111,6 +134,18 @@ const AppId = () => {
   };
 
   const onClickHandler = () => {
+    const { isDisabled, infoLabel } = validationHandler();
+    if (isDisabled) {
+      toast.info(infoLabel, {
+        position: 'top-right',
+        autoClose: 6000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
     if (!runScript) {
       isKmScriptLoaded();
       runKmScript();
@@ -120,7 +155,7 @@ const AppId = () => {
     Kommunicate.logout();
     handleRunScript(false);
   };
-  console.log(runScript);
+
   const btnText = !runScript ? 'Run Script' : 'Logout';
 
   return (

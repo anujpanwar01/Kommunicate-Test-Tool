@@ -50,16 +50,37 @@ input {
   transition: background 300ms ease-in, border 300ms ease, color 0.25ms ease;
 }
 
+body.theme-black .editor-container {
+  border-right: 1px solid #373e47;
+}
+
 .Toastify {
   color: #ffffff;
   /* Replace with your desired text color */
 
 }
 
+body.theme-black .Toastify__toast {
+  border: 1px solid rgba(205, 217, 299, 0.1);
+  background-color: #373e47;
+}
+
+body.theme-black .Toastify__toast-body {
+  color: #adbac7;
+}
+
 .Toastify__toast-body {
   color: #1c1c1c
 }
 
-/* header {
-  transition: background-color 300ms ease-in;
-} */
+.Toastify__close-button {
+  color: inherit
+}
+
+body.theme-black .Toastify__progress-bar--error {
+  background: #c93c37;
+}
+
+body.theme-black .Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #c93c37;
+}

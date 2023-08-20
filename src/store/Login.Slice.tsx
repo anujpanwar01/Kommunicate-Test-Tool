@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface LoginInterface {
-  value: string | number;
+  value: string;
 }
 
 const initialState: LoginInterface = {
@@ -13,7 +13,7 @@ export const LoginSlice = createSlice({
   name: 'Login',
   initialState,
   reducers: {
-    inputChange: (state, action: PayloadAction<string | number>) => {
+    inputChange: (state, action: PayloadAction<string>) => {
       return { ...state, value: action.payload };
     },
   },

@@ -6,10 +6,10 @@ export const LoginContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 16px;
-  height: 80vh;
+  height: 86vh;
   input {
-    width: 300px;
-    padding: 12px 16px;
+    width: 350px;
+    height: 24px;
   }
   button {
     width: 150px;
