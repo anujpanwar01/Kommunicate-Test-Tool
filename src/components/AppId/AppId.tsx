@@ -25,6 +25,12 @@ const AppId = () => {
   const loadingRef = React.useRef(loading);
 
   const isKmScriptLoaded = () => {
+    const isLocal = currentEnv.id === 0;
+
+    const errorMsg = isLocal
+      ? 'Either your local is not running or your code is compiling'
+      : 'Not able to load your Kommunicate widget please check your appId';
+
     setLoading(true);
     loadingRef.current = true;
 
@@ -49,17 +55,14 @@ const AppId = () => {
       const timeId = setTimeout(() => {
         clearTimeout(timeId);
         if (loadingRef.current === false) return;
-        toast.error(
-          'Not able to load your Kommunicate widget please check you appId',
-          {
-            position: 'top-right',
-            autoClose: 6000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          },
-        );
+        toast.error(errorMsg, {
+          position: 'top-right',
+          autoClose: 6000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         setLoading(false);
         clearInterval(intervalId);
         document.querySelector('.kommunicate-custom-iframe')?.remove();

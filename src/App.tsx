@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { setCurrentServer } from './store/Env.Slice';
 
 const Header = React.lazy(() => import('./components/Header/Header'));
+const Footer = React.lazy(() => import('./components/Footer/Footer'));
 const router = createBrowserRouter(routers);
 
 const App: React.FC = () => {
@@ -48,6 +49,7 @@ const App: React.FC = () => {
     <React.Suspense fallback={<p>Loading</p>}>
       <Header />
       <RouterProvider router={router} fallbackElement={<p>loading..</p>} />
+      <Footer />
       <ToastContainer />
     </React.Suspense>
   );
