@@ -12,6 +12,9 @@ const Main: React.FC = () => {
 export default Main;
 
 const MainContainer = styled.section`
+  @media (max-width: 641px) {
+    padding: 0 10px;
+  }
   &,
   & > div {
     /* height: 100%; */

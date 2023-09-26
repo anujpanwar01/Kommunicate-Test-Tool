@@ -40,7 +40,7 @@ const AppId = () => {
 
     const errorMsg = isLocal
       ? 'Either your local is not running or your code is compiling'
-      : 'Not able to load your Kommunicate widget please check your appId';
+      : 'Not able to load your widget please check your appId';
 
     setLoading(true);
     loadingRef.current = true;
