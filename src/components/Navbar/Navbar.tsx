@@ -5,10 +5,10 @@ import Theme from '../Theme/Theme';
 import ThemeContext from '../../store/ThemeContext';
 import { DARK_THEME } from '../../Helper/Constant';
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ toggle: boolean }> = ({ toggle }) => {
   const { theme } = React.useContext(ThemeContext);
   return (
-    <Style.Navbar isblacktheme={`${theme.value === DARK_THEME ? '1' : '0'}`}>
+    <Style.Navbar className="menu-bar" isblacktheme={`${theme.value === DARK_THEME ? '1' : '0'}`}>
       {NavItems.map((item) => {
         return (
           <li className="nav-item" key={item.title}>

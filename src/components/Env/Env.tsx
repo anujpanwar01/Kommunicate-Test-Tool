@@ -88,7 +88,7 @@ const Env: React.FC = () => {
           </label>
         );
       })}
-      <div style={{ marginLeft: 'auto' }}>
+      <div className="dropdown-container">
         {' '}
         <Dropdown
           className="env-dropdown"
