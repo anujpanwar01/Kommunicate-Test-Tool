@@ -22,18 +22,25 @@ export const Header = styled.header<ThemeInterface>`
   @media (max-width: 641px) {
     padding: 8px 10px;
   }
-  .menu-open + nav {
-    display: flex;
-  }
-
-  .menu-close + nav {
-    display: none;
-  }
 
   h4 {
     margin: 0;
   }
+  @media (max-width: 641px) {
+    .hamburger {
+      display: block !important;
+    }
+    .menu-open + nav {
+      display: flex;
+    }
+
+    .menu-close + nav {
+      display: none;
+    }
+  }
   .hamburger {
+    display: none;
+
     .line {
       ${(props) =>
         props.theme === DARK_THEME

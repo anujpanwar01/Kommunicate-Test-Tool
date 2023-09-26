@@ -12,7 +12,7 @@ const Main: React.FC = () => {
 export default Main;
 
 const MainContainer = styled.section`
-  @media (max-width: 641px) {
+  @media (max-width:1000px) {
     padding: 0 10px;
   }
   &,
